@@ -37,6 +37,7 @@ public class Main {
 			// Exits Shell
 			case "e":
 			case "exit":
+				System.out.println("<( '.' )> bye!");
 				System.exit(0);
 				break;
 			case "u":
@@ -48,25 +49,76 @@ public class Main {
 				input = scanner.nextLine().substring(1);
 				current_dir = moveDown(input, current_dir);
 				break;
+			case "r":
+			case "rmDir":
+				input = scanner.nextLine().substring(1);
+				deleteFolder(current_dir + "\\" + input);
+				break;
+			case "m":
+			case "mkdir":
+				input = scanner.nextLine().substring(1);
+				createFolder(current_dir + "\\" + input);
+				break;
+			case "n":
+			case "newF":
+				input = scanner.nextLine().substring(1);
+				createFile(current_dir + "\\" + input);
+				break;
 			case "cracker":
-
+				kirbyCracker();
 				break;
 			default:
 				System.out.println("invalid command type help to get list of valid commands");
 			}
 		}
 	}
-	//takes working directory and the desired directory and appends one to the other
+
+	// Prints the commands for kirbyshell
+	public void getHelp() {
+		String[] cmd = { " \t(L)ist: lists contents of current directory",
+				"\t(d)own [dir]:moves into the specified child directory", "\t(u)p: moves to the parent directory",
+				"\t(w)ai: prints the current directory", "\t(e)xit: exits the shell",
+				"\t(h)elp: prints a list of the supported commands", "\t(r)mDir [dir]: deletes specified directory", 
+				"\t(m)kdir [dir]: creates a directory in the current working directory"};
+		for (int i = 0; i < cmd.length; i++) {
+			System.out.println(cmd[i]);
+		}
+	}
+
+	public void deleteFolder(String path) {
+		File folder = new File(path);
+		folder.delete();
+	}
+
+	public void createFolder(String path) {
+		File folder = new File(path);
+		folder.mkdirs();
+	}
+	public void createFile(String path){
+		File new_file = new File(path);
+		try {
+			new_file.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void kirbyCracker() {
+		System.out.println("#<('0'<)");
+	}
+
+	// takes working directory and the desired directory and appends one to the
+	// other
 	public String moveDown(String directory, String current_directory) {
 		String new_path = current_directory + directory;
-		//checks for valid path
+		// checks for valid path
 		File file = new File(new_path);
-		//if it's not a valid path return last working directory
+		// if it's not a valid path return last working directory
 		if (!file.isDirectory()) {
 			System.out.println("invalid directory");
 			return current_directory;
 		}
-		//if path does exist return the new_path
+		// if path does exist return the new_path
 		if (file.exists()) {
 			System.out.println(new_path);
 			return new_path;
@@ -74,7 +126,8 @@ public class Main {
 		return null;
 
 	}
-	//moves working directory up one level
+
+	// moves working directory up one level
 	public String moveUp(String current_directory) {
 		String path[] = current_directory.split("\\\\");
 		String new_path = "";
@@ -86,7 +139,7 @@ public class Main {
 			System.out.println("invalid directory");
 			return current_directory;
 		}
-		//if path does exist return the new_path
+		// if path does exist return the new_path
 		if (file.exists()) {
 			System.out.println(new_path);
 			return new_path;
@@ -110,17 +163,6 @@ public class Main {
 			} else if (listOfFiles[i].isDirectory()) {
 				System.out.println("(d) " + listOfFiles[i].getName());
 			}
-		}
-	}
-
-	// Prints the commands for kirbyshell
-	public void getHelp() {
-		String[] cmd = { " \t(L)ist: lists contents of current directory",
-				"\t(d)own [dir]:moves into the specified child directory", "\t(u)p: moves to the parent directory",
-				"\t(w)ai: prints the current directory", "\t(e)xit: exits the shell",
-				"\t(h)elp: prints a list of the supported commands" };
-		for (int i = 0; i < cmd.length; i++) {
-			System.out.println(cmd[i]);
 		}
 	}
 
