@@ -94,25 +94,6 @@ public class Main {
 		return null;
 	}
 
-	// gets an array of lines after running DIR command
-	public ArrayList<String> dirText() {
-		try {
-			ArrayList<String> bits = new ArrayList<String>();
-			Process p = new ProcessBuilder("CMD", "/CDIR").start();
-			p.waitFor();
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				bits.add(line);
-			}
-			return bits;
-		} catch (IOException e1) {
-		} catch (InterruptedException e2) {
-		}
-		return null;
-	}
-
 	// uses dirtext and parses it looking for just the directory line
 	public String getStartDirectory() {
 		return System.getProperty("user.dir");
