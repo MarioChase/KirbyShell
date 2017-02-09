@@ -79,7 +79,6 @@ public class Main {
 				concatenate(current_dir + sep + input);
 				break;
 			case "cracker":
-				System.out.println(File.separator);
 				kirbyCracker();
 				break;
 			default:
