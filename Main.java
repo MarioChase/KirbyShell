@@ -15,11 +15,14 @@ public class Main {
 	}
 
 	public void initialize() {
+		//gets proper file seperator
 		String sep = File.separator;
+		//finds it's working directory
 		String current_dir = getStartDirectory();
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to KirbyShell (>'.')>");
 		while (true) {
+			//case statements used to layout commands and act accordingly
 			System.out.print("(>'.')>");
 			String input = scanner.next().toLowerCase();
 			switch (input) {
@@ -100,7 +103,7 @@ public class Main {
 			System.out.println(cmd[i]);
 		}
 	}
-
+	//displays the text of a file
 	public void concatenate(String path) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -114,21 +117,21 @@ public class Main {
 				System.out.println("error");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			// catches invalid inputs
 			System.out.println("not valid file!");
 		}
 	}
-
+	//deletes the folder in designated location
 	public void deleteFolder(String path) {
 		File folder = new File(path);
 		folder.delete();
 	}
-
+	//creates the folder in designated location
 	public void createFolder(String path) {
 		File folder = new File(path);
 		folder.mkdirs();
 	}
-
+	//Deletes file if it's there
 	public void deleteFile(String path) {
 		File file = new File(path);
 		if (file.delete()) {
@@ -137,7 +140,7 @@ public class Main {
 			System.out.println("Delete operation failed.");
 		}
 	}
-
+	//creates file if it's there
 	public void createFile(String path) {
 		File new_file = new File(path);
 		try {
@@ -147,7 +150,7 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-
+	//Silly little text output
 	public void kirbyCracker() {
 		System.out.println("#<('0'<)");
 	}
